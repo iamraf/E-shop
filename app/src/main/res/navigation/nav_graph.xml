@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/productsFragment">
+
+    <fragment
+        android:id="@+id/productsFragment"
+        android:name="com.github.h01d.eshop.ui.products.ProductsFragment"
+        android:label="Products"
+        tools:layout="@layout/products_fragment" >
+        <action
+            android:id="@+id/productsToCart"
+            app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/productsToAdd"
+            app:destination="@id/addProductFragment" />
+        <action
+            android:id="@+id/productToDetails"
+            app:destination="@id/productDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customersFragment"
+        android:name="com.github.h01d.eshop.ui.customers.CustomersFragment"
+        android:label="Customers"
+        tools:layout="@layout/customers_fragment" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.github.h01d.eshop.ui.cart.CartFragment"
+        android:label="Shopping Cart"
+        tools:layout="@layout/cart_fragment"/>
+    <fragment
+        android:id="@+id/addProductFragment"
+        android:name="com.github.h01d.eshop.ui.add.AddProductFragment"
+        android:label="Add Product"
+        tools:layout="@layout/add_product_fragment"/>
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.github.h01d.eshop.ui.productdetails.ProductDetailsFragment"
+        android:label="Product"
+        tools:layout="@layout/product_details_fragment">
+        <argument
+            android:name="product"
+            app:argType="com.github.h01d.eshop.data.database.entity.ProductEntity" />
+    </fragment>
+    <fragment
+        android:id="@+id/salesFragment"
+        android:name="com.github.h01d.eshop.ui.sales.SalesFragment"
+        android:label="Sales"
+        tools:layout="@layout/sales_fragment">
+        <action
+            android:id="@+id/salesToDetails"
+            app:destination="@id/saleDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saleDetailsFragment"
+        android:name="com.github.h01d.eshop.ui.saledetails.SaleDetailsFragment"
+        android:label="Sale"
+        tools:layout="@layout/sale_details_fragment">
+        <argument
+            android:name="sale"
+            app:argType="com.github.h01d.eshop.data.models.Sale" />
+    </fragment>
+</navigation>
