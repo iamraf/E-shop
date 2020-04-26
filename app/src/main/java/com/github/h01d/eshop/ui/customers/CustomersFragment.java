@@ -10,18 +10,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.h01d.eshop.R;
-import com.github.h01d.eshop.data.database.entity.CustomerEntity;
 import com.github.h01d.eshop.databinding.CustomersFragmentBinding;
 
-public class CustomersFragment extends Fragment implements CustomersAdapter.CustomersAdapterListener
+public class CustomersFragment extends Fragment
 {
-    private CustomersViewModel mViewModel;
     private CustomersFragmentBinding mDataBinding;
 
     @Override
@@ -31,7 +28,7 @@ public class CustomersFragment extends Fragment implements CustomersAdapter.Cust
 
         mDataBinding.fCustomersRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mDataBinding.fCustomersRecycler.setHasFixedSize(true);
-        mDataBinding.fCustomersRecycler.setAdapter(new CustomersAdapter(this));
+        mDataBinding.fCustomersRecycler.setAdapter(new CustomersAdapter());
 
         return mDataBinding.getRoot();
     }
@@ -41,12 +38,10 @@ public class CustomersFragment extends Fragment implements CustomersAdapter.Cust
     {
         super.onActivityCreated(savedInstanceState);
 
-        mViewModel = new ViewModelProvider(this).get(CustomersViewModel.class);
+        CustomersViewModel mViewModel = new ViewModelProvider(this).get(CustomersViewModel.class);
 
         mViewModel.getCustomers().observe(getViewLifecycleOwner(), customers ->
         {
-            Log.d("TEST123", "SIZE: " + customers.size());
-
             if(customers.isEmpty())
             {
                 mDataBinding.fCustomersRecycler.setVisibility(View.GONE);
@@ -60,11 +55,5 @@ public class CustomersFragment extends Fragment implements CustomersAdapter.Cust
                 ((CustomersAdapter) mDataBinding.fCustomersRecycler.getAdapter()).setData(customers);
             }
         });
-    }
-
-    @Override
-    public void onClicked(CustomerEntity customer)
-    {
-
     }
 }

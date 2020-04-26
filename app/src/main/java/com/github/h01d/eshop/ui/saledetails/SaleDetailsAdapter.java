@@ -50,7 +50,7 @@ public class SaleDetailsAdapter extends RecyclerView.Adapter<SaleDetailsAdapter.
         return data.size();
     }
 
-    class SaleDetailsViewHolder extends RecyclerView.ViewHolder
+    static class SaleDetailsViewHolder extends RecyclerView.ViewHolder
     {
         private final SaleDetailsItemBinding binding;
 
