@@ -68,7 +68,7 @@ public class ProductDetailsFragment extends Fragment
                             }
                             else
                             {
-                                if(mViewModel.insertCart(new CartEntity(mProduct.getId(), quantity)))
+                                if(mViewModel.addToCart(new CartEntity(mProduct.getId(), quantity)))
                                 {
                                     Toast.makeText(getContext(), "Item added to cart", Toast.LENGTH_SHORT).show();
                                 }
@@ -110,13 +110,13 @@ public class ProductDetailsFragment extends Fragment
     {
         super.onCreateOptionsMenu(menu, inflater);
 
-        inflater.inflate(R.menu.productdetails_menu, menu);
+        inflater.inflate(R.menu.delete_menu, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item)
     {
-        if(item.getItemId() == R.id.m_productdetails_delete)
+        if(item.getItemId() == R.id.m_delete)
         {
             new AlertDialog.Builder(getContext())
                     .setTitle("Delete")

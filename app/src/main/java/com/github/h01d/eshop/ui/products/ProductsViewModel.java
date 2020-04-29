@@ -62,9 +62,9 @@ public class ProductsViewModel extends AndroidViewModel
         productsDao.update(product);
     }
 
-    public boolean insertCart(CartEntity cart)
+    public boolean addToCart(CartEntity cart)
     {
-        CartEntity tmp = cartDao.getSyncCartProductId(cart.getProductId());
+        CartEntity tmp = cartDao.getCartProduct(cart.getProductId());
 
         if(tmp == null)
         {

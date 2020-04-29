@@ -16,8 +16,12 @@ public class CustomersAdapter extends RecyclerView.Adapter<CustomersAdapter.Cust
 {
     private List<CustomerEntity> data;
 
-    public CustomersAdapter()
+    private CustomersAdapterListener listener;
+
+    public CustomersAdapter(CustomersAdapterListener listener)
     {
+        this.listener = listener;
+
         data = new ArrayList<>();
     }
 
@@ -50,7 +54,7 @@ public class CustomersAdapter extends RecyclerView.Adapter<CustomersAdapter.Cust
         return data.size();
     }
 
-    static class CustomersViewHolder extends RecyclerView.ViewHolder
+    class CustomersViewHolder extends RecyclerView.ViewHolder
     {
         private final CustomerItemBinding binding;
 
@@ -63,8 +67,14 @@ public class CustomersAdapter extends RecyclerView.Adapter<CustomersAdapter.Cust
 
         void bind(CustomerEntity item)
         {
+            binding.getRoot().setOnClickListener(v -> listener.onClicked(binding.getCustomer()));
             binding.setCustomer(item);
             binding.executePendingBindings();
         }
+    }
+
+    interface CustomersAdapterListener
+    {
+        void onClicked(CustomerEntity customer);
     }
 }

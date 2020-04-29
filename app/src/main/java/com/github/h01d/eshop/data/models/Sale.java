@@ -51,7 +51,7 @@ public class Sale implements Serializable
     {
         try
         {
-            textView.setText(new SimpleDateFormat("dd/MM/yy HH:mm", Locale.US).format(date));
+            textView.setText(new SimpleDateFormat("dd MMMM yyyy HH:mm", Locale.US).format(date));
         }
         catch(Exception e)
         {

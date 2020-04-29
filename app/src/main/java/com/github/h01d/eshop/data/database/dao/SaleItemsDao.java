@@ -27,6 +27,9 @@ public interface SaleItemsDao
     @Query("SELECT * FROM sale_items INNER JOIN products ON item_product_id = product_id WHERE item_sale_id = :id")
     LiveData<List<SaleItem>> getItems(int id);
 
+    @Query("SELECT * FROM sale_items INNER JOIN products ON item_product_id = product_id WHERE item_sale_id = :id")
+    List<SaleItem> getSaleItems(int id);
+
     @Query("SELECT * FROM sale_items WHERE item_product_id = :id")
     LiveData<List<SaleItemEntity>> getItemsSold(int id);
 }

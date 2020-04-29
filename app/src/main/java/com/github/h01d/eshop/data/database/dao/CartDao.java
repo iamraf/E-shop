@@ -31,5 +31,5 @@ public interface CartDao
     LiveData<List<Cart>> getJoinedCart();
 
     @Query("SELECT * FROM cart WHERE cart_product_id = :id")
-    CartEntity getSyncCartProductId(int id);
+    CartEntity getCartProduct(int id);
 }

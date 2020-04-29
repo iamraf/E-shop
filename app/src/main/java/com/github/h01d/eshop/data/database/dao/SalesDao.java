@@ -26,4 +26,7 @@ public interface SalesDao
 
     @Query("SELECT * FROM sales INNER JOIN customers on sale_customer_id = customer_id")
     LiveData<List<Sale>> getSales();
+
+    @Query("SELECT * FROM sales WHERE sale_customer_id = :id")
+    List<SaleEntity> getCustomerSales(int id);
 }

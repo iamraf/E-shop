@@ -1,5 +1,6 @@
 package com.github.h01d.eshop.ui.customers;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -15,10 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.h01d.eshop.R;
+import com.github.h01d.eshop.data.database.entity.CustomerEntity;
 import com.github.h01d.eshop.databinding.CustomersFragmentBinding;
 
-public class CustomersFragment extends Fragment
+public class CustomersFragment extends Fragment implements CustomersAdapter.CustomersAdapterListener
 {
+    private CustomersViewModel mViewModel;
     private CustomersFragmentBinding mDataBinding;
 
     @Override
@@ -28,7 +31,7 @@ public class CustomersFragment extends Fragment
 
         mDataBinding.fCustomersRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mDataBinding.fCustomersRecycler.setHasFixedSize(true);
-        mDataBinding.fCustomersRecycler.setAdapter(new CustomersAdapter());
+        mDataBinding.fCustomersRecycler.setAdapter(new CustomersAdapter(this));
 
         return mDataBinding.getRoot();
     }
@@ -38,7 +41,7 @@ public class CustomersFragment extends Fragment
     {
         super.onActivityCreated(savedInstanceState);
 
-        CustomersViewModel mViewModel = new ViewModelProvider(this).get(CustomersViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(CustomersViewModel.class);
 
         mViewModel.getCustomers().observe(getViewLifecycleOwner(), customers ->
         {
@@ -55,5 +58,16 @@ public class CustomersFragment extends Fragment
                 ((CustomersAdapter) mDataBinding.fCustomersRecycler.getAdapter()).setData(customers);
             }
         });
+    }
+
+    @Override
+    public void onClicked(CustomerEntity customer)
+    {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Remove")
+                .setMessage("Do you want to remove this customer?")
+                .setPositiveButton("YES", (dialogInterface, i) -> mViewModel.delete(customer))
+                .setNegativeButton("NO", null)
+                .show();
     }
 }
