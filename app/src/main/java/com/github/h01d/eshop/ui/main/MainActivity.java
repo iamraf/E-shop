@@ -16,7 +16,7 @@ import com.github.h01d.eshop.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity
 {
     private ActivityMainBinding mDataBinding;
-    private NavController navController;
+    private NavController mNavController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -27,17 +27,16 @@ public class MainActivity extends AppCompatActivity
         mDataBinding.aMainToolbar.setTitle("E-shop");
         setSupportActionBar(mDataBinding.aMainToolbar);
 
-        navController = Navigation.findNavController(this, R.id.a_main_host);
+        mNavController = Navigation.findNavController(this, R.id.a_main_host);
 
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.productsFragment, R.id.customersFragment, R.id.salesFragment).setDrawerLayout(mDataBinding.aMainDrawer).build();
-        NavigationUI.setupWithNavController(mDataBinding.aMainToolbar, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(mDataBinding.aMainNavigation, navController);
+        NavigationUI.setupWithNavController(mDataBinding.aMainToolbar, mNavController, new AppBarConfiguration.Builder(R.id.productsFragment, R.id.customersFragment, R.id.salesFragment).setDrawerLayout(mDataBinding.aMainDrawer).build());
+        NavigationUI.setupWithNavController(mDataBinding.aMainNavigation, mNavController);
     }
 
     @Override
     public boolean onSupportNavigateUp()
     {
-        return NavigationUI.navigateUp(navController, mDataBinding.aMainDrawer) || super.onSupportNavigateUp();
+        return NavigationUI.navigateUp(mNavController, mDataBinding.aMainDrawer) || super.onSupportNavigateUp();
     }
 
     @Override

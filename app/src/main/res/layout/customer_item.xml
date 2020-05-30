@@ -36,6 +36,5 @@
                 android:text="@{`Address: ` + customer.address}"
                 android:textSize="16sp" />
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
 </layout>

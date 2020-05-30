@@ -26,6 +26,5 @@
             android:layout_height="match_parent"
             android:paddingStart="4dp"
             android:paddingEnd="4dp"/>
-
     </FrameLayout>
 </layout>
